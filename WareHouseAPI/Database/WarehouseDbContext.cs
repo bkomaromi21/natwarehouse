@@ -14,12 +14,23 @@ namespace WareHouseAPI.Database
     /// </summary>
     public class WarehouseDbContext : DbContext
     {
-        public DbSet<Part> Parts { get; set; }
+        public DbSet<PartEntity> Parts { get; set; }
+
+        public DbSet<StockElementEntity> StockElements { get; set; }
 
         public WarehouseDbContext(DbContextOptions<WarehouseDbContext> options)
              : base(options)
         {
             Database.EnsureCreated();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<StockElementEntity>()
+                        .HasOne(c => c.Part)
+                        .WithOne(e => e.Inventory);
         }
     }
 }

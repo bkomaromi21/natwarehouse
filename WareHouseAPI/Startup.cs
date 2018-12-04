@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using WareHouseAPI.Database;
@@ -18,9 +13,11 @@ namespace WareHouseAPI
         {
             var connectionString = "Server=localhost;Database=WarehouseDB;User Id=sa;Password=SecretPass0!";
             services.AddDbContext<WarehouseDbContext>(o => o.UseSqlServer(connectionString));
+
+            services.AddMvc();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        // Configuring the request pipeline and creating initial data for the database
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, WarehouseDbContext dbContext)
         {
             if (env.IsDevelopment())
@@ -30,9 +27,11 @@ namespace WareHouseAPI
 
             dbContext.CreateSeedData();
 
-            app.Run(async (context) =>
+            app.UseMvc(routes =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
