@@ -22,7 +22,12 @@ namespace WareHouseAPI.Controllers
         {
             var stockElements = this.context.StockElements.Include(st => st.Part).ToList();
 
-            return Ok(stockElements.Select(el => el.toDTO()));
+            var stockElementWrapper = new StockElementsDTO
+            {
+                StockElements = stockElements.Select(el => el.toDTO()).ToList()
+            };
+
+            return Ok(stockElementWrapper);
         }
 
         [HttpPut("/api/stockelements/increase")]

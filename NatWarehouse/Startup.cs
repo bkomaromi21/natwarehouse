@@ -14,6 +14,15 @@ namespace WareHouseAPI
             var connectionString = "Server=localhost;Database=WarehouseDB;User Id=sa;Password=SecretPass0!";
             services.AddDbContext<WarehouseDbContext>(o => o.UseSqlServer(connectionString));
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("UnsecureCorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+
             services.AddMvc();
         }
 
@@ -27,12 +36,8 @@ namespace WareHouseAPI
 
             dbContext.CreateSeedData();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseCors("UnsecureCorsPolicy");
+            app.UseMvc();
         }
     }
 }

@@ -1,0 +1,24 @@
+<table mat-table [dataSource]="stockElements" class="stock-element-table">
+  <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.part.name}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <td mat-cell *matCellDef="let element"> {{element.part.price}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="priceInEur">
+      <th mat-header-cell *matHeaderCellDef> Price in EUR </th>
+      <td mat-cell *matCellDef="let element"> {{element.part.priceInEur}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let element"> {{element.part.description}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
