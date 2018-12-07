@@ -1,26 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using WareHouseAPI.Database;
+using NatWarehouse.Controllers;
+using NatWarehouse.Exceptions;
+using NatWarehouse.Repositories;
 using WareHouseAPI.DTOs;
-using WareHouseAPI.Entities;
 
 namespace WareHouseAPI.Controllers
 {
     /// <summary>
     /// Controller class for CRUD operations on the stock elements
     /// </summary>
-    public class StockElementAPIController : BaseAPIController
+    public class StockElementAPIController: WarehouseController
     {
-        public StockElementAPIController(WarehouseDbContext context) : base(context) { }
+        IStockElementRepository stockElementRepository;
+
+        public StockElementAPIController(IStockElementRepository stockElementRepository) {
+            this.stockElementRepository = stockElementRepository;
+        }
 
         [HttpGet("/api/stockelements/getall")]
         public IActionResult GetAll()
         {
-            var stockElements = this.context.StockElements.Include(st => st.Part).ToList();
+            var stockElements = this.stockElementRepository.GetAll();
 
             var stockElementWrapper = new StockElementsDTO
             {
@@ -33,71 +34,28 @@ namespace WareHouseAPI.Controllers
         [HttpPut("/api/stockelements/increase")]
         public IActionResult Increase([FromBody] StockElementChangeDTO stockElement)
         {
-            var stockElementToIncrease = this.context.StockElements.Where(el => el.PartId == stockElement.PartId).FirstOrDefault();
-
-            if (stockElementToIncrease == null) {
-                return NotFound();
-            }
-
-            stockElementToIncrease.Quantity += stockElement.ChangedQuantity;
-
-            this.context.SaveChanges();
-
+            this.stockElementRepository.Increase(stockElement.PartId, stockElement.ChangedQuantity);
             return Ok();
         }
 
         [HttpPut("/api/stockelements/decrease")]
         public IActionResult Decrease([FromBody] StockElementChangeDTO stockElement)
         {
-            var stockElementToIncrease = this.context.StockElements.Where(el => el.PartId == stockElement.PartId).FirstOrDefault();
-
-            if (stockElementToIncrease == null)
-            {
-                return NotFound();
-            }
-
-            stockElementToIncrease.Quantity -= stockElement.ChangedQuantity;
-
-            this.context.SaveChanges();
-
+            this.stockElementRepository.Decrease(stockElement.PartId, stockElement.ChangedQuantity);
             return Ok();
         }
 
         [HttpPost("/api/stockelements/add")]
         public IActionResult Add([FromBody] StockElementChangeDTO stockElement)
         {
-            var stockElementToAdd = this.context.StockElements.FirstOrDefault(el => el.PartId == stockElement.PartId);
-            var partToAdd = this.context.Parts.FirstOrDefault(part => part.Id == stockElement.PartId);
-
-            if (stockElementToAdd != null || partToAdd == null)
-            {
-                return BadRequest();
-            }
-
-            stockElementToAdd = new StockElementEntity
-            {
-                Part = partToAdd,
-                Quantity = stockElement.ChangedQuantity
-            };
-
-            this.context.Add(stockElementToAdd);
-            this.context.SaveChanges();
-
+            this.stockElementRepository.Add(stockElement.PartId, stockElement.ChangedQuantity);
             return Ok();
         }
 
         [HttpDelete("/api/stockelements/delete")]
         public IActionResult Delete([FromBody] StockElementChangeDTO stockElement)
         {
-            var stockElementToDelete = this.context.StockElements.FirstOrDefault(el => el.PartId == stockElement.PartId);
-
-            if (stockElementToDelete == null) {
-                return NotFound();
-            }
-
-            this.context.Remove(stockElementToDelete);
-            this.context.SaveChanges();
-
+            this.stockElementRepository.Delete(stockElement.PartId);
             return Ok();
         }
     }

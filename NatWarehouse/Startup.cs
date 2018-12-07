@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using NatWarehouse.Repositories;
 using WareHouseAPI.Database;
 
 namespace WareHouseAPI
@@ -14,9 +15,13 @@ namespace WareHouseAPI
             var connectionString = "Server=localhost;Database=WarehouseDB;User Id=sa;Password=SecretPass0!";
             services.AddDbContext<WarehouseDbContext>(o => o.UseSqlServer(connectionString));
 
+            services.AddScoped<IPartRepository, PartRepository>();
+            services.AddScoped<IStatisticsRepository, StatisticsRepository>();
+            services.AddScoped<IStockElementRepository, StockElementRepository>();
+
             services.AddCors(options =>
             {
-                options.AddPolicy("UnsecureCorsPolicy",
+                options.AddPolicy("CorsPolicy",
                     builder => builder.AllowAnyOrigin()
                     .AllowAnyMethod()
                     .AllowAnyHeader()
@@ -36,7 +41,7 @@ namespace WareHouseAPI
 
             dbContext.CreateSeedData();
 
-            app.UseCors("UnsecureCorsPolicy");
+            app.UseCors("CorsPolicy");
             app.UseMvc();
         }
     }

@@ -10,10 +10,15 @@
     <Folder Include="Database\" />
     <Folder Include="Controllers\" />
     <Folder Include="DTOs\" />
+    <Folder Include="Repositories\" />
+    <Folder Include="Exceptions\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\BaseAPIController.cs" />
   </ItemGroup>
 </Project>
