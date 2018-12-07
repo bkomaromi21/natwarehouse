@@ -10,8 +10,9 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { RouterModule, Routes } from '@angular/router';
 import { WarehouseApiService } from './warehouse-api.service';
 import { HttpClientModule } from '@angular/common/http';
-import { MatTableModule, MatSortHeader, MatSortModule } from '@angular/material';
+import { MatTableModule, MatSortHeader, MatSortModule, MatInputModule, MatOptionModule, MatSelectModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { StockElementEditorComponent } from './stock-element-editor/stock-element-editor.component';
 
 
 const appRoutes: Routes = [
@@ -25,8 +26,10 @@ const appRoutes: Routes = [
     AppComponent,
     HomeComponent,
     StockElementsComponent,
+    StockElementEditorComponent,
     PartsComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    StockElementEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +38,9 @@ const appRoutes: Routes = [
     HttpClientModule,
     MatTableModule,
     MatSortModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
     BrowserAnimationsModule
   ],
   providers: [

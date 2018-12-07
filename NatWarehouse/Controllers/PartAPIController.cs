@@ -5,6 +5,7 @@ using System.Linq;
 using WareHouseAPI.Entities;
 using NatWarehouse.Controllers;
 using NatWarehouse.Repositories;
+using NatWarehouse.DTOs;
 
 namespace WareHouseAPI.Controllers
 {
@@ -30,7 +31,13 @@ namespace WareHouseAPI.Controllers
         [HttpGet("/api/parts/getall")]
         public IActionResult Read()
         {
-            return Ok(this.partRepository.Read());
+            var parts = this.partRepository.Read().Select(part => part.toDTO()).ToList();
+            var partWrapper = new PartsDTO
+            {
+                Parts = parts
+            };
+
+            return Ok(partWrapper);
         }
 
         [HttpPut("/api/parts/modify")]

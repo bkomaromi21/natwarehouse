@@ -10,8 +10,12 @@ export class WarehouseApiService {
     this.headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
   }
 
-  public getAll() {
+  public getAllStockElements() {
     return this.http.get(this.accessPointUrl + 'stockelements/getall', {headers: this.headers});
+  }
+
+  public getAllParts() {
+    return this.http.get(this.accessPointUrl + 'parts/getall', {headers: this.headers});
   }
 
   public addPart(payload) {

@@ -9,9 +9,11 @@ import { WarehouseApiService } from '../warehouse-api.service';
 export class HomeComponent implements OnInit {
 
   stockElements: Array<any> = [];
+  parts: Array<any> = [];
 
   constructor(private warehouseApiService: WarehouseApiService) {
-    this.warehouseApiService.getAll().subscribe((data: any) => this.stockElements = data.stockElements);
+    this.warehouseApiService.getAllStockElements().subscribe((data: any) => this.stockElements = data.stockElements);
+    this.warehouseApiService.getAllParts().subscribe((data: any) => this.parts = data.parts);
   }
 
   ngOnInit() {

@@ -1,4 +1,13 @@
 .grid-container {
     width: 60%;
-    padding: 0px 5px 0px 0px;
+    float: left;
+}
+
+.element-editor {
+    width: 40%;
+    float: right;
+}
+
+.container {
+    width: 100%;
 }
