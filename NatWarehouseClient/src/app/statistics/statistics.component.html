@@ -1,3 +1,6 @@
-<p>
-  statistics works!
-</p>
+<mat-tab-group>
+    <mat-tab label="The heaviest part">{{statistics.heaviestPart.name}}</mat-tab>
+    <mat-tab label="The most frequent part">{{statistics.mostFrequentPart.name}}</mat-tab>
+    <mat-tab label="Mass of every product">{{statistics.sumMass}}</mat-tab>
+    <mat-tab label="Price of every product (HUF)">{{statistics.sumPrice}}</mat-tab>
+  </mat-tab-group>

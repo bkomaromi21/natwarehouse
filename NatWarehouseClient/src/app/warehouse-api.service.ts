@@ -18,6 +18,10 @@ export class WarehouseApiService {
     return this.http.get(this.accessPointUrl + 'parts/getall', {headers: this.headers});
   }
 
+  public getStatistics() {
+    return this.http.get(this.accessPointUrl + 'statistics/get', {headers: this.headers});
+  }
+
   public addPart(payload) {
     return this.http.post(this.accessPointUrl, payload, {headers: this.headers});
   }

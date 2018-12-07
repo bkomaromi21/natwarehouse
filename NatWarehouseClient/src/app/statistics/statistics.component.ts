@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WarehouseApiService } from '../warehouse-api.service';
 
 @Component({
   selector: 'app-statistics',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatisticsComponent implements OnInit {
 
-  constructor() { }
+  statistics: any = { heaviestPart: {}, mostFrequenPart: {}};
+
+  constructor(private warehouseApiService: WarehouseApiService) {
+    this.warehouseApiService.getStatistics().subscribe((data: any) => this.statistics = data);
+  }
 
   ngOnInit() {
   }

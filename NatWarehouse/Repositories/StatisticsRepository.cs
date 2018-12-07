@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using WareHouseAPI.Database;
 using WareHouseAPI.Entities;
 
@@ -20,15 +21,13 @@ namespace NatWarehouse.Repositories
         public PartEntity GetHeaviestPart()
         {
             var stockElements = this.context.StockElements;
-            return stockElements.Aggregate((currentHeaviest, x) => (currentHeaviest == null || x.Part.Mass > currentHeaviest.Part.Mass ? x : currentHeaviest)).Part;
+            return stockElements.Include(st => st.Part).ToList().Aggregate((currentHeaviest, x) => (x.Part.Mass > currentHeaviest.Part.Mass ? x : currentHeaviest)).Part;
         }
 
         public PartEntity GetMostFrequentPart()
         {
             var stockElements = this.context.StockElements;
-            var mostFrequentPart = stockElements.Aggregate((currentHeaviest, x) => (currentHeaviest == null || x.Quantity > currentHeaviest.Quantity ? x : currentHeaviest)).Part;
-
-            return mostFrequentPart;
+            return stockElements.Include(st => st.Part).ToList().Aggregate((mostFrequent, x) => (x.Quantity > mostFrequent.Quantity ? x : mostFrequent)).Part;
         }
 
         public double GetSumMass()

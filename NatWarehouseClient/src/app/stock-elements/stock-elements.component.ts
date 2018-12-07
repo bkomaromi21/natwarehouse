@@ -11,7 +11,7 @@ export class StockElementsComponent implements OnInit, OnChanges {
   @ViewChild(MatTable) table: MatTable<any>;
   @Input() stockElements: Array<any>;
 
-  displayedColumns: string[] = ['name', 'description', 'price', 'priceInEur'];
+  displayedColumns: string[] = ['name', 'description', 'mass', 'price', 'priceInEur', 'quantity'];
 
   constructor() { }
 
