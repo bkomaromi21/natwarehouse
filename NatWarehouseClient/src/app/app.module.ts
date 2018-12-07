@@ -10,11 +10,14 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { RouterModule, Routes } from '@angular/router';
 import { WarehouseApiService } from './warehouse-api.service';
 import { HttpClientModule } from '@angular/common/http';
-import { MatTableModule } from '@angular/material';
+import { MatTableModule, MatSortHeader, MatSortModule } from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent }
+  { path: '', component: HomeComponent },
+  { path: 'parts', component: PartsComponent },
+  { path: 'statistics', component: StatisticsComponent },
 ];
 
 @NgModule({
@@ -30,7 +33,9 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     AppRoutingModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatSortModule,
+    BrowserAnimationsModule
   ],
   providers: [
     WarehouseApiService
