@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NatWarehouse.Repositories;
+using NatWarehouse.Services;
 using WareHouseAPI.Database;
 
 namespace WareHouseAPI
@@ -18,6 +19,8 @@ namespace WareHouseAPI
             services.AddScoped<IPartRepository, PartRepository>();
             services.AddScoped<IStatisticsRepository, StatisticsRepository>();
             services.AddScoped<IStockElementRepository, StockElementRepository>();
+
+            services.AddSingleton<ICurrencyService, CurrencyService>();
 
             services.AddCors(options =>
             {

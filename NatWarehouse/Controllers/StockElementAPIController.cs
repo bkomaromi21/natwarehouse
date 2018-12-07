@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NatWarehouse.Controllers;
 using NatWarehouse.Exceptions;
 using NatWarehouse.Repositories;
+using NatWarehouse.Services;
 using WareHouseAPI.DTOs;
 
 namespace WareHouseAPI.Controllers
@@ -13,19 +14,23 @@ namespace WareHouseAPI.Controllers
     public class StockElementAPIController: WarehouseController
     {
         IStockElementRepository stockElementRepository;
+        ICurrencyService currencyService;
 
-        public StockElementAPIController(IStockElementRepository stockElementRepository) {
+        public StockElementAPIController(IStockElementRepository stockElementRepository, ICurrencyService currencyService) {
             this.stockElementRepository = stockElementRepository;
+            this.currencyService = currencyService;
         }
 
         [HttpGet("/api/stockelements/getall")]
         public IActionResult GetAll()
         {
+            var conversionRate = this.currencyService.GetExchangeRate("eur", false);
+
             var stockElements = this.stockElementRepository.GetAll();
 
             var stockElementWrapper = new StockElementsDTO
             {
-                StockElements = stockElements.Select(el => el.toDTO()).ToList()
+                StockElements = stockElements.Select(el => el.toDTO(conversionRate)).ToList()
             };
 
             return Ok(stockElementWrapper);

@@ -32,5 +32,14 @@ namespace WareHouseAPI.Entities
                 Quantity = this.Quantity
             };
         }
+
+        public StockElementDTO toDTO(double? eurConversionRate)
+        {
+            return new StockElementDTO
+            {
+                Part = this.Part.toDTO(eurConversionRate),
+                Quantity = this.Quantity
+            };
+        }
     }
 }

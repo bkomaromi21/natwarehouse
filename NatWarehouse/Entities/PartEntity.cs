@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using WareHouseAPI.DTOs;
 
@@ -34,6 +35,18 @@ namespace WareHouseAPI.Entities
             {
                 Name = this.Name,
                 Price = this.Price,
+                Description = this.Description,
+                Mass = this.Mass
+            };
+        }
+
+        public PartDTO toDTO(double? eurCurrencyRate)
+        {
+            return new PartDTO
+            {
+                Name = this.Name,
+                Price = this.Price,
+                PriceInEur = eurCurrencyRate.HasValue ? Math.Round(this.Price / eurCurrencyRate.Value, 3) : 0,
                 Description = this.Description,
                 Mass = this.Mass
             };
