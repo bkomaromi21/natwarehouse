@@ -37,6 +37,14 @@ namespace WareHouseAPI.Controllers
             return Ok(partWrapper);
         }
 
+        [HttpGet("/api/parts/get/{id}")]
+        public IActionResult Read(int id)
+        {
+            var part = this.partRepository.Read(id);
+
+            return Ok(part.toDTO());
+        }
+
         [HttpPut("/api/parts/modify")]
         public IActionResult Update([FromBody] PartDTO part)
         {

@@ -37,6 +37,11 @@ namespace NatWarehouse.Repositories
             return this.context.Parts.ToList();
         }
 
+        public PartEntity Read(int id)
+        {
+            return this.context.Parts.FirstOrDefault(part => part.Id == id);
+        }
+
         public void Update(int partId,string description, double mass, int price)
         {
             var partToModify = this.context.Parts.Find(partId);

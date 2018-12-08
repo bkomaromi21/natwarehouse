@@ -30,15 +30,19 @@ export class WarehouseApiService {
     return this.http.put(this.accessPointUrl + 'stockelements/decrease', payload, {headers: this.headers});
   }
 
+  public getPart(payload) {
+    return this.http.get(this.accessPointUrl + 'parts/get/' + payload.id, {headers: this.headers});
+  }
+
   public addPart(payload) {
-    return this.http.post(this.accessPointUrl, payload, {headers: this.headers});
+    return this.http.post(this.accessPointUrl + 'parts/create', payload, {headers: this.headers});
   }
 
   public removePart(payload) {
-    return this.http.delete(this.accessPointUrl + '/' + payload.id, {headers: this.headers});
+    return this.http.delete(this.accessPointUrl + 'parts/delete/' + payload.id, {headers: this.headers});
   }
 
   public updatePart(payload) {
-    return this.http.put(this.accessPointUrl + '/' + payload.id, payload, {headers: this.headers});
+    return this.http.put(this.accessPointUrl + 'parts/modify' + payload.id, payload, {headers: this.headers});
   }
 }

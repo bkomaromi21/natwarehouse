@@ -13,6 +13,8 @@ namespace NatWarehouse.Repositories
 
         List<PartEntity> Read();
 
+        PartEntity Read(int id);
+
         void Update(int partId, string description, double mass, int price);
 
         void Delete(int partId);
