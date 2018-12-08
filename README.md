@@ -5,13 +5,14 @@ ASP.NET Core web application with Angular frontend. Application developed and te
 ## Prerequisites
 - .NET Core 2.1
 - npm
+- Angular CLI
 - MS SQL
 - Docker (on macOS)
 
 ## Instructions
 
 ### Start MS SQL Docker image
-This is needed on macOS, on Windows it might be not needed
+This is needed on macOS, on Windows the default MS SQL Server should work by default
 - sudo docker pull microsoft/mssql-server-linux:2017-latest
 - sudo docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=SecretPass0!' -p 1433:1433 --name mssql -d microsoft/mssql-server-linux:2017-latest
 - docker start mssql
