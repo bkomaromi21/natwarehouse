@@ -14,10 +14,5 @@ namespace NatWarehouse.Repositories
         void Increase(int partId, int quantity);
 
         void Decrease(int partId, int quantity);
-
-        void Add(int partId, int quantity);
-
-        void Delete(int partId);
-
     }
 }

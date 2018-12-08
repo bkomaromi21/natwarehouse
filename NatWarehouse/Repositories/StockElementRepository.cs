@@ -28,21 +28,33 @@ namespace NatWarehouse.Repositories
 
         public void Increase(int partId, int quantity)
         {
-            var stockElementToIncrease = this.context.StockElements.Include(st => st.Part).Where(el => el.PartId == partId).FirstOrDefault();
+            var stockElementToIncrease = this.context.StockElements.Include(st => st.Part).FirstOrDefault(el => el.PartId == partId);
 
             if (stockElementToIncrease == null)
             {
-                throw new WarehouseApplicationException(ExceptionCode.EntityNotFound);
-            }
+                var partToAdd = this.context.Parts.FirstOrDefault(el => el.Id == partId);
+                if (partToAdd == null) {
+                    throw new WarehouseApplicationException(ExceptionCode.InvalidState);
+                } else {
+                    var stockElementToAdd = new StockElementEntity
+                    {
+                        Part = partToAdd,
+                        Quantity = quantity
+                    };
 
-            stockElementToIncrease.Quantity += quantity;
+                    this.context.Add(stockElementToAdd);
+                }
+
+            } else {
+                stockElementToIncrease.Quantity += quantity;
+            }
 
             this.context.SaveChanges();
         }
 
         public void Decrease(int partId, int quantity)
         {
-            var stockElementToDecrease = this.context.StockElements.Include(st => st.Part).Where(el => el.PartId == partId).FirstOrDefault();
+            var stockElementToDecrease = this.context.StockElements.Include(st => st.Part).FirstOrDefault(el => el.PartId == partId);
 
             if (stockElementToDecrease == null)
             {
@@ -53,41 +65,13 @@ namespace NatWarehouse.Repositories
                 throw new WarehouseApplicationException(ExceptionCode.InvalidState);
             }
 
-            stockElementToDecrease.Quantity -= quantity;
-
-            this.context.SaveChanges();
-        }
-
-        public void Add(int partId, int quantity)
-        {
-            var stockElementToAdd = this.context.StockElements.FirstOrDefault(el => el.PartId == partId);
-            var partToAdd = this.context.Parts.FirstOrDefault(part => part.Id == partId);
-
-            if (stockElementToAdd != null || partToAdd == null)
+            if (stockElementToDecrease.Quantity - quantity == 0)
             {
-                throw new WarehouseApplicationException(ExceptionCode.InvalidState);
+                this.context.Remove(stockElementToDecrease);
+            } else {
+                stockElementToDecrease.Quantity -= quantity;
             }
 
-            stockElementToAdd = new StockElementEntity
-            {
-                Part = partToAdd,
-                Quantity = quantity
-            };
-
-            this.context.Add(stockElementToAdd);
-            this.context.SaveChanges();
-        }
-
-        public void Delete(int partId)
-        {
-            var stockElementToDelete = this.context.StockElements.FirstOrDefault(el => el.PartId == partId);
-
-            if (stockElementToDelete == null)
-            {
-                throw new WarehouseApplicationException(ExceptionCode.EntityNotFound);
-            }
-
-            this.context.Remove(stockElementToDelete);
             this.context.SaveChanges();
         }
     }

@@ -49,19 +49,5 @@ namespace WareHouseAPI.Controllers
             this.stockElementRepository.Decrease(stockElement.PartId, stockElement.ChangedQuantity);
             return Ok();
         }
-
-        [HttpPost("/api/stockelements/add")]
-        public IActionResult Add([FromBody] StockElementChangeDTO stockElement)
-        {
-            this.stockElementRepository.Add(stockElement.PartId, stockElement.ChangedQuantity);
-            return Ok();
-        }
-
-        [HttpDelete("/api/stockelements/delete")]
-        public IActionResult Delete([FromBody] StockElementChangeDTO stockElement)
-        {
-            this.stockElementRepository.Delete(stockElement.PartId);
-            return Ok();
-        }
     }
 }

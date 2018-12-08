@@ -1,8 +1,8 @@
-<div class="container">
-    <div class="grid-container">
+<div class="row">
+    <div class="col-md-8">
         <app-stock-elements [stockElements]="stockElements"></app-stock-elements>
     </div>
-    <div class="element-editor">
+    <div class="col-md-4">
         <app-stock-element-editor [parts]="parts" (dataChanged)="onDataChanged($event)"></app-stock-element-editor>
     </div>
 </div>
