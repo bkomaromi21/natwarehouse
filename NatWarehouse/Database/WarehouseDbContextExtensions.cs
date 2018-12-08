@@ -11,7 +11,7 @@ namespace WareHouseAPI.Database
     {
         public static void CreateSeedData(this WarehouseDbContext context)
         {
-            if (context.StockElements.Any()) {
+            if (context.Parts.Any()) {
                 return;
             }
 

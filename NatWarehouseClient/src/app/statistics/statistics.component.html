@@ -1,6 +1,40 @@
 <mat-tab-group>
-    <mat-tab label="The heaviest part">{{statistics.heaviestPart.name}}</mat-tab>
-    <mat-tab label="The most frequent part">{{statistics.mostFrequentPart.name}}</mat-tab>
-    <mat-tab label="Mass of every product">{{statistics.sumMass}}</mat-tab>
-    <mat-tab label="Price of every product (HUF)">{{statistics.sumPrice}}</mat-tab>
+    <mat-tab label="The heaviest part">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Statistics information</h5>
+              <h6 class="card-subtitle mb-2 text-muted">The heaviest part:</h6>
+              <p class="card-text">{{statistics.heaviestPart.name}}</p>
+            </div>
+          </div>
+    </mat-tab>
+    <mat-tab label="The most frequent part">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Statistics information</h5>
+              <h6 class="card-subtitle mb-2 text-muted">The most frequent part:</h6>
+              <p class="card-text">{{statistics.mostFrequentPart.name}}</p>
+            </div>
+          </div>
+    </mat-tab>
+    
+    <mat-tab label="Mass of every product">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Statistics information</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Mass of every product:</h6>
+              <p class="card-text">{{statistics.sumMass}} kg</p>
+            </div>
+          </div>
+    </mat-tab>
+
+    <mat-tab label="Price of every product (HUF)">
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Statistics information</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Price of every product:</h6>
+        <p class="card-text">{{statistics.sumPrice}} HUF</p>
+      </div>
+    </div>
+  </mat-tab>
   </mat-tab-group>
