@@ -19,4 +19,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  onDataChanged() {
+    this.warehouseApiService.getAllStockElements().subscribe((data: any) => this.stockElements = data.stockElements);
+  }
+
 }

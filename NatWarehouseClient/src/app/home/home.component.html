@@ -3,6 +3,6 @@
         <app-stock-elements [stockElements]="stockElements"></app-stock-elements>
     </div>
     <div class="element-editor">
-        <app-stock-element-editor [parts]="parts"></app-stock-element-editor>
+        <app-stock-element-editor [parts]="parts" (dataChanged)="onDataChanged($event)"></app-stock-element-editor>
     </div>
 </div>

@@ -22,6 +22,14 @@ export class WarehouseApiService {
     return this.http.get(this.accessPointUrl + 'statistics/get', {headers: this.headers});
   }
 
+  public increaseStockElement(payload) {
+    return this.http.put(this.accessPointUrl + 'stockelements/increase', payload, {headers: this.headers});
+  }
+
+  public decreaseStockElement(payload) {
+    return this.http.put(this.accessPointUrl + 'stockelements/decrease', payload, {headers: this.headers});
+  }
+
   public addPart(payload) {
     return this.http.post(this.accessPointUrl, payload, {headers: this.headers});
   }

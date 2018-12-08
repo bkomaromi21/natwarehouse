@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { WarehouseApiService } from '../warehouse-api.service';
 
 @Component({
   selector: 'app-stock-element-editor',
@@ -8,10 +9,22 @@ import { Component, OnInit, Input } from '@angular/core';
 export class StockElementEditorComponent implements OnInit {
 
   @Input() parts: Array<any>;
+  @Output() dataChanged = new EventEmitter<boolean>();
 
-  constructor() { }
+  selectedPart: any;
+  quantity: number;
+
+  constructor(private warehouseApiService: WarehouseApiService) { }
 
   ngOnInit() {
+  }
+
+  public increase () {
+    this.warehouseApiService.increaseStockElement({partId: this.selectedPart.id, changedQuantity: this.quantity}).subscribe((data: any) => this.dataChanged.emit(true));
+  }
+
+  public decrease () {
+    this.warehouseApiService.decreaseStockElement({partId: this.selectedPart.id, changedQuantity: this.quantity}).subscribe((data: any) => this.dataChanged.emit(true));
   }
 
 }

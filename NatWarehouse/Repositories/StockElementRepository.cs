@@ -28,7 +28,7 @@ namespace NatWarehouse.Repositories
 
         public void Increase(int partId, int quantity)
         {
-            var stockElementToIncrease = this.context.StockElements.Where(el => el.PartId == partId).FirstOrDefault();
+            var stockElementToIncrease = this.context.StockElements.Include(st => st.Part).Where(el => el.PartId == partId).FirstOrDefault();
 
             if (stockElementToIncrease == null)
             {
@@ -42,11 +42,15 @@ namespace NatWarehouse.Repositories
 
         public void Decrease(int partId, int quantity)
         {
-            var stockElementToDecrease = this.context.StockElements.Where(el => el.PartId == partId).FirstOrDefault();
+            var stockElementToDecrease = this.context.StockElements.Include(st => st.Part).Where(el => el.PartId == partId).FirstOrDefault();
 
             if (stockElementToDecrease == null)
             {
                 throw new WarehouseApplicationException(ExceptionCode.EntityNotFound);
+            }
+
+            if (stockElementToDecrease.Quantity - quantity < 0) {
+                throw new WarehouseApplicationException(ExceptionCode.InvalidState);
             }
 
             stockElementToDecrease.Quantity -= quantity;

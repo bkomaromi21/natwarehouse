@@ -33,6 +33,7 @@ namespace WareHouseAPI.Entities
         public PartDTO toDTO() {
             return new PartDTO
             {
+                Id = this.Id,
                 Name = this.Name,
                 Price = this.Price,
                 Description = this.Description,
@@ -44,6 +45,7 @@ namespace WareHouseAPI.Entities
         {
             return new PartDTO
             {
+                Id = this.Id,
                 Name = this.Name,
                 Price = this.Price,
                 PriceInEur = eurCurrencyRate.HasValue ? Math.Round(this.Price / eurCurrencyRate.Value, 3) : 0,

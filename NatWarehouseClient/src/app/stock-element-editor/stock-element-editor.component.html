@@ -1,14 +1,14 @@
 <div class="example-container">
     <mat-form-field>
-        <mat-select placeholder="Select part">
-          <mat-option *ngFor="let part of parts" [value]="part.partId">{{part.name}}</mat-option>
+        <mat-select placeholder="Select part" [(value)]="selectedPart">
+          <mat-option *ngFor="let part of parts" [value]="part">{{part.name}}</mat-option>
         </mat-select>
       </mat-form-field>
     <mat-form-field>
-      <textarea matInput placeholder="Quantity"></textarea>
+      <textarea matInput placeholder="Quantity" type="number" [(ngModel)]="quantity"></textarea>
     </mat-form-field>
 </div>
 <div class="example-button-row">
-    <button mat-raised-button color="primary">Decrease quantity</button>
-    <button mat-raised-button color="primary">Increase quantity</button>
+    <button mat-raised-button color="primary" (click)="decrease()">Decrease quantity</button>
+    <button mat-raised-button color="primary" (click)="increase()">Increase quantity</button>
 </div>
