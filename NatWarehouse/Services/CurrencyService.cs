@@ -5,6 +5,9 @@ using www.mnb.hu.webservices;
 
 namespace NatWarehouse.Services
 {
+    /// <summary>
+    /// Currency service implementation. It uses MNB webservice to fetch exchange rates.
+    /// </summary>
     public class CurrencyService : ICurrencyService
     {
         private const string RATE_TAG_NAME = "Rate";

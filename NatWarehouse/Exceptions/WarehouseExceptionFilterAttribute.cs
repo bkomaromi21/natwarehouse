@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace NatWarehouse.Exceptions
 {
+    /// <summary>
+    /// Warehouse exception filter attribute. It catches some application specific exceptions, and returns an appropiate HTML response.
+    /// </summary>
     public class WarehouseExceptionFilterAttribute : ExceptionFilterAttribute
     {
         public override void OnException(ExceptionContext context)

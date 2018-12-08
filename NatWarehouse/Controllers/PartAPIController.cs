@@ -1,15 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WareHouseAPI.Database;
 using WareHouseAPI.DTOs;
 using System.Linq;
-using WareHouseAPI.Entities;
 using NatWarehouse.Controllers;
 using NatWarehouse.Repositories;
 using NatWarehouse.DTOs;
 
 namespace WareHouseAPI.Controllers
 {
-
     /// <summary>
     /// Controller class for CRUD operations on the parts
     /// </summary>

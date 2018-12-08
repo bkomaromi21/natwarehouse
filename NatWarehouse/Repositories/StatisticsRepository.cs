@@ -7,7 +7,7 @@ using WareHouseAPI.Entities;
 namespace NatWarehouse.Repositories
 {
     /// <summary>
-    /// Statistics repository implementation.
+    /// Statistics repository implementation Calculates and returns statistics related information.
     /// </summary>
     public class StatisticsRepository : IStatisticsRepository
     {

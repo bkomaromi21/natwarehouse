@@ -35,15 +35,16 @@ namespace NatWarehouse.Repositories
                 var partToAdd = this.context.Parts.FirstOrDefault(el => el.Id == partId);
                 if (partToAdd == null) {
                     throw new WarehouseApplicationException(ExceptionCode.InvalidState);
-                } else {
-                    var stockElementToAdd = new StockElementEntity
-                    {
-                        Part = partToAdd,
-                        Quantity = quantity
-                    };
-
-                    this.context.Add(stockElementToAdd);
                 }
+
+                // Adding a new element if the part exists, but there was no element before.
+                var stockElementToAdd = new StockElementEntity
+                {
+                    Part = partToAdd,
+                    Quantity = quantity
+                };
+
+                this.context.Add(stockElementToAdd);
 
             } else {
                 stockElementToIncrease.Quantity += quantity;
@@ -65,6 +66,7 @@ namespace NatWarehouse.Repositories
                 throw new WarehouseApplicationException(ExceptionCode.InvalidState);
             }
 
+            // Removing element if there is no more remaining entry.
             if (stockElementToDecrease.Quantity - quantity == 0)
             {
                 this.context.Remove(stockElementToDecrease);

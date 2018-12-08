@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using NatWarehouse.Controllers;
-using NatWarehouse.Exceptions;
 using NatWarehouse.Repositories;
 using NatWarehouse.Services;
 using WareHouseAPI.DTOs;
