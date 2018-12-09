@@ -9,13 +9,13 @@ namespace NatWarehouse.Repositories
     /// </summary>
     public interface IPartRepository
     {
-        void Create(string description, double mass, int price);
+        void Create(string name, string description, double mass, int price);
 
         List<PartEntity> Read();
 
         PartEntity Read(int id);
 
-        void Update(int partId, string description, double mass, int price);
+        void Update(int partId, string name, string description, double mass, int price);
 
         void Delete(int partId);
     }

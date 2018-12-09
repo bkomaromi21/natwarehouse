@@ -21,7 +21,7 @@ namespace WareHouseAPI.Controllers
         [HttpPost("/api/parts/create")]
         public IActionResult Create([FromBody] PartDTO part)
         {
-            this.partRepository.Create(part.Description, part.Mass, part.Price);
+            this.partRepository.Create(part.Name, part.Description, part.Mass, part.Price);
             return Ok();
         }
 
@@ -48,14 +48,14 @@ namespace WareHouseAPI.Controllers
         [HttpPut("/api/parts/modify")]
         public IActionResult Update([FromBody] PartDTO part)
         {
-            this.partRepository.Update(part.Id, part.Description, part.Mass, part.Price);
+            this.partRepository.Update(part.Id, part.Name, part.Description, part.Mass, part.Price);
             return Ok();
         }
 
-        [HttpDelete("/api/parts/delete")]
-        public IActionResult Delete([FromBody] PartDTO part)
+        [HttpDelete("/api/parts/delete/{id}")]
+        public IActionResult Delete(int id)
         {
-            this.partRepository.Delete(part.Id);
+            this.partRepository.Delete(id);
             return Ok();
         }
     }

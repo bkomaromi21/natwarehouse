@@ -1,0 +1,13 @@
+.editor-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .editor-container > * {
+    width: 100%;
+  }
+
+  button {
+      float: right;
+      margin: 2px;
+  }

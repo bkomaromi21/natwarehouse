@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import {MatTable} from '@angular/material';
 
 @Component({
@@ -6,7 +6,7 @@ import {MatTable} from '@angular/material';
   templateUrl: './stock-elements.component.html',
   styleUrls: ['./stock-elements.component.css']
 })
-export class StockElementsComponent implements OnInit, OnChanges {
+export class StockElementsComponent implements OnInit {
 
   @ViewChild(MatTable) table: MatTable<any>;
   @Input() stockElements: Array<any>;
@@ -17,11 +17,4 @@ export class StockElementsComponent implements OnInit, OnChanges {
 
   ngOnInit() {
   }
-
-  ngOnChanges(changes: SimpleChanges) {
-    //if(changes && this.table && changes.stockElements) {
-    //  this.table.renderRows();
-    //}
-  }
-
 }

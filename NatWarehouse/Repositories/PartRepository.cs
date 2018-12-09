@@ -19,10 +19,11 @@ namespace NatWarehouse.Repositories
             this.context = context;
         }
 
-        public void Create(string description, double mass, int price)
+        public void Create(string name, string description, double mass, int price)
         {
             var partToCreate = new PartEntity
             {
+                Name = name,
                 Description = description,
                 Mass = mass,
                 Price = price
@@ -42,7 +43,7 @@ namespace NatWarehouse.Repositories
             return this.context.Parts.FirstOrDefault(part => part.Id == id);
         }
 
-        public void Update(int partId,string description, double mass, int price)
+        public void Update(int partId, string name, string description, double mass, int price)
         {
             var partToModify = this.context.Parts.Find(partId);
 
@@ -50,6 +51,7 @@ namespace NatWarehouse.Repositories
                 throw new WarehouseApplicationException(ExceptionCode.EntityNotFound);
             }
 
+            partToModify.Name = name;
             partToModify.Description = description;
             partToModify.Mass = mass;
             partToModify.Price = price;

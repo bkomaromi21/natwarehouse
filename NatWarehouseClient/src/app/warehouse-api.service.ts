@@ -39,10 +39,10 @@ export class WarehouseApiService {
   }
 
   public removePart(payload) {
-    return this.http.delete(this.accessPointUrl + 'parts/delete/' + payload.id, {headers: this.headers});
+    return this.http.delete(this.accessPointUrl + 'parts/delete/' + payload, {headers: this.headers});
   }
 
   public updatePart(payload) {
-    return this.http.put(this.accessPointUrl + 'parts/modify' + payload.id, payload, {headers: this.headers});
+    return this.http.put(this.accessPointUrl + 'parts/modify', payload, {headers: this.headers});
   }
 }

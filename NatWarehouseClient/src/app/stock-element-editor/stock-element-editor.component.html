@@ -1,4 +1,4 @@
-<div class="example-container">
+<div class="editor-container">
     <mat-form-field>
         <mat-select placeholder="Select part" [(value)]="selectedPart">
           <mat-option *ngFor="let part of parts" [value]="part">{{part.name}}</mat-option>
@@ -8,7 +8,7 @@
       <textarea matInput placeholder="Quantity" type="number" [(ngModel)]="quantity"></textarea>
     </mat-form-field>
 </div>
-<div class="example-button-row">
+<div class="editor-button-row">
     <button mat-raised-button color="primary" (click)="decrease()">Decrease quantity</button>
     <button mat-raised-button color="primary" (click)="increase()">Increase quantity</button>
 </div>

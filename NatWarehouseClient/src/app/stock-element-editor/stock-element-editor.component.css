@@ -1,9 +1,9 @@
-.example-container {
+.editor-container {
     display: flex;
     flex-direction: column;
   }
   
-  .example-container > * {
+  .editor-container > * {
     width: 100%;
   }
 

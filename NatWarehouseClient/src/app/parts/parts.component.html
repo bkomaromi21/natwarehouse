@@ -1,3 +1,24 @@
-<p>
-  parts works!
-</p>
+<div class="editor-container">
+  <mat-form-field>
+      <mat-select placeholder="Select part" [(value)]="selectedPart" (selectionChange)="selectedPartChanged($event)">
+        <mat-option [value]="emptyObject">Create new part</mat-option>
+        <mat-option *ngFor="let part of parts" [value]="part">{{part.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <textarea matInput placeholder="Name" type="text" [(ngModel)]="partToEdit.name"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+          <textarea matInput placeholder="Description" type="text" [(ngModel)]="partToEdit.description"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+          <textarea matInput placeholder="Price in HUF" type="number" [(ngModel)]="partToEdit.price"></textarea>
+      </mat-form-field>
+      <mat-form-field>
+        <textarea matInput placeholder="Mass" type="number" [(ngModel)]="partToEdit.mass"></textarea>
+      </mat-form-field>
+</div>
+<div class="editor-button-row">
+  <button mat-raised-button color="primary" (click)="delete()" [disabled]="!selectedPart ||  selectedPart.id === 0">Delete</button>
+  <button mat-raised-button color="primary" (click)="save()">Save</button>
+</div>
