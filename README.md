@@ -26,5 +26,6 @@ Easiest way is to run from Visual Studio, or run with dotnet CLI commands:
 ### Start client application
 Use Angular CLI to start the development server:
 - cd NatWarehouseClient
+- npm install
 - ng serve
 - Open http://localhost:4200
